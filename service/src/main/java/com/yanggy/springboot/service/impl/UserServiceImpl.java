@@ -4,6 +4,7 @@ import com.yanggy.springboot.dto.UserParam;
 import com.yanggy.springboot.entity.User;
 import com.yanggy.springboot.mapper.UserMapper;
 import com.yanggy.springboot.service.UserService;
+import io.shardingjdbc.core.keygen.DefaultKeyGenerator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<?> addUser(User user) {
+        DefaultKeyGenerator keyGenerator = new DefaultKeyGenerator();
+        user.setId(keyGenerator.generateKey().longValue());
         return new ResponseEntity<Object>(userMapper.insertUser(user),HttpStatus.OK);
     }
 }

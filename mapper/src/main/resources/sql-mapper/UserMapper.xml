@@ -10,7 +10,7 @@
 
 
     <insert id="insertUser">
-        INSERT INTO user(name,user_id, age) VALUES(#{name},#{userId}, #{age})
+        INSERT INTO user(id,name,user_id, age) VALUES(#{id},#{name},#{userId}, #{age})
     </insert>
 
     <select id="getUserList" parameterType="com.yanggy.springboot.dto.UserParam" resultMap="userMap">
