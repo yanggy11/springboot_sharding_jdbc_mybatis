@@ -29,8 +29,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<?> addUser(User user) {
-        DefaultKeyGenerator keyGenerator = new DefaultKeyGenerator();
-        user.setId(keyGenerator.generateKey().longValue());
         return new ResponseEntity<Object>(userMapper.insertUser(user),HttpStatus.OK);
     }
 }

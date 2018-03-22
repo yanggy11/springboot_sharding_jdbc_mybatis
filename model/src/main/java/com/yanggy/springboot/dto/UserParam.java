@@ -2,12 +2,14 @@ package com.yanggy.springboot.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * Created by yangguiyun on 2017/9/26.
  */
 
 @Data
-public class UserParam {
+public class UserParam implements Serializable{
 
     private String name;
     private int pageNo = 1;

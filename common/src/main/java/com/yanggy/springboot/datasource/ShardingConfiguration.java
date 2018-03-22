@@ -6,7 +6,6 @@ import io.shardingjdbc.core.api.config.ShardingRuleConfiguration;
 import io.shardingjdbc.core.api.config.TableRuleConfiguration;
 import io.shardingjdbc.core.api.config.strategy.InlineShardingStrategyConfiguration;
 import io.shardingjdbc.core.keygen.DefaultKeyGenerator;
-import org.apache.commons.dbcp.BasicDataSource;
 import org.codehaus.groovy.runtime.metaclass.ConcurrentReaderHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
