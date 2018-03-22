@@ -46,10 +46,10 @@ public class ShardingConfiguration {
         orderTableRuleConfig.setKeyGeneratorClass(DefaultKeyGenerator.class.getName());
 
         // 配置分库策略
-        orderTableRuleConfig.setDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("user_id", "ds_${user_id % 2}"));
+        orderTableRuleConfig.setDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("user_id", "dbs_${user_id % 2}"));
 
         // 配置分表策略
-        orderTableRuleConfig.setTableShardingStrategyConfig(new InlineShardingStrategyConfiguration("id", "user_${user % 3}"));
+        orderTableRuleConfig.setTableShardingStrategyConfig(new InlineShardingStrategyConfiguration("id", "user_${id % 3}"));
 
         // 配置分片规则
         ShardingRuleConfiguration shardingRuleConfig = new ShardingRuleConfiguration();
