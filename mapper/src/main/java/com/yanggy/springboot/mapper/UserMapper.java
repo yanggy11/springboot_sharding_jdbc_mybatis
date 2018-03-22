@@ -1,0 +1,20 @@
+package com.yanggy.springboot.mapper;
+
+
+import com.yanggy.springboot.dto.UserParam;
+import com.yanggy.springboot.entity.User;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+
+/**
+ * Created by yangguiyun on 2017/6/1.
+ */
+
+@Mapper
+public interface UserMapper {
+
+    int insertUser(User user);
+    List<User> getUserList(UserParam userParam);
+
+}
