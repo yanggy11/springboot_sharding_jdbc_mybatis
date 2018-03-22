@@ -14,6 +14,10 @@ import java.util.List;
 public class User implements Serializable {
     private long id;
     private long userId;
+    private String password;
     private String name;
     private int age;
+    private int deleteFlag;
+    private Date addTime;
+    private Date updateTime;
 }

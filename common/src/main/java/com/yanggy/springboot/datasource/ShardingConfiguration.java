@@ -36,15 +36,25 @@ public class ShardingConfiguration {
         dataSourceMap.put("dbs_1", this.buildDataSource(shardingProperties.getUrl2(), shardingProperties.getDriverClassName(), shardingProperties.getPassword(), shardingProperties.getUsername()));
 
         TableRuleConfiguration orderTableRuleConfig = new TableRuleConfiguration();
-        orderTableRuleConfig.setLogicTable("user");
-        orderTableRuleConfig.setActualDataNodes("dbs_${0..1}.user_${0..2}");
+        orderTableRuleConfig.setLogicTable("order");
+        orderTableRuleConfig.setActualDataNodes("dbs_${0..1}.order_${0..2}");
         orderTableRuleConfig.setKeyGeneratorColumnName("id");
         orderTableRuleConfig.setKeyGeneratorClass(DefaultKeyGenerator.class.getName());
         orderTableRuleConfig.setDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("user_id", "dbs_${user_id % 2}"));
-        orderTableRuleConfig.setTableShardingStrategyConfig(new InlineShardingStrategyConfiguration("id", "user_${id % 3}"));
+        orderTableRuleConfig.setTableShardingStrategyConfig(new InlineShardingStrategyConfiguration("id", "order_${id % 3}"));
+
+        TableRuleConfiguration userTableRuleConfig = new TableRuleConfiguration();
+        userTableRuleConfig.setLogicTable("user");
+        userTableRuleConfig.setActualDataNodes("dbs_${0..1}.user_${0}");
+        userTableRuleConfig.setKeyGeneratorColumnName("id");
+        userTableRuleConfig.setKeyGeneratorClass(DefaultKeyGenerator.class.getName());
+        userTableRuleConfig.setDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("id", "dbs_${id % 2}"));
+        userTableRuleConfig.setTableShardingStrategyConfig(new InlineShardingStrategyConfiguration("id", "user_${id % id}"));
 
         ShardingRuleConfiguration shardingRuleConfig = new ShardingRuleConfiguration();
+
         shardingRuleConfig.getTableRuleConfigs().add(orderTableRuleConfig);
+        shardingRuleConfig.getTableRuleConfigs().add(userTableRuleConfig);
 
         return ShardingDataSourceFactory.createDataSource(dataSourceMap, shardingRuleConfig, new ConcurrentReaderHashMap(), new Properties());
     }

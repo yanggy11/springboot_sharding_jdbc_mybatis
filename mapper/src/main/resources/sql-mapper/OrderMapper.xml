@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanggy.springboot.mapper.OrderMapper">
+    <resultMap id="orderMap" type="com.yanggy.springboot.entity.Orders">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="price" property="price" jdbcType="INTEGER"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <insert id="addOrder">
+        INSERT INTO order(user_id, price, address) VALUES(#{userId}, #{price},#{address})
+    </insert>
+
+    <select id="getOrdersByUserId" parameterType="com.yanggy.springboot.entity.Orders" resultMap="orderMap">
+        select id,user_id, price, address from order
+        <where>
+            <if test="userId != null">
+                user_id = #{userId}
+            </if>
+        </where>
+        <!--<if test="offset > -1 and pageSize > 0">-->
+            <!--limit #{offset}, #{pageSize}-->
+        <!--</if>-->
+    </select>
+
+    <select id="countOrders" parameterType="com.yanggy.springboot.dto.OrderParam" resultType="java.lang.Integer">
+        select COUNT(1) from ORDER
+        <where>
+            <if test="userId != null">
+                user_id = #{userId}
+            </if>
+        </where>
+    </select>
+</mapper>
