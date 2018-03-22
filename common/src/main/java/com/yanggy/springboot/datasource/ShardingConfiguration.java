@@ -31,8 +31,6 @@ public class ShardingConfiguration {
     private ShardingProperties shardingProperties;
     @Bean
     public DataSource dataSource() throws SQLException {
-        DataSource shardingDataSource = null;
-
         Map<String, DataSource> dataSourceMap = new HashMap<>();
         //配置数据库数据源
         dataSourceMap.put("dbs_0", this.buildDataSource(shardingProperties.getUrl(), shardingProperties.getDriverClassName(), shardingProperties.getPassword(), shardingProperties.getUsername()));
