@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<?> addUser(User user) {
         userMapper.insertUser(user);
+
         return new ResponseEntity<Object>(user,HttpStatus.OK);
     }
 }

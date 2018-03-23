@@ -34,23 +34,24 @@ public class ShardingConfiguration {
         //配置数据库数据源
         dataSourceMap.put("dbs_0", this.buildDataSource(shardingProperties.getUrl(), shardingProperties.getDriverClassName(), shardingProperties.getPassword(), shardingProperties.getUsername()));
         dataSourceMap.put("dbs_1", this.buildDataSource(shardingProperties.getUrl2(), shardingProperties.getDriverClassName(), shardingProperties.getPassword(), shardingProperties.getUsername()));
+        dataSourceMap.put("dbs_2", this.buildDataSource(shardingProperties.getUrl3(), shardingProperties.getDriverClassName(), shardingProperties.getPassword(), shardingProperties.getUsername()));
 
         //订单表分表分库规则
         TableRuleConfiguration orderTableRuleConfig = new TableRuleConfiguration();
         orderTableRuleConfig.setLogicTable("order");
-        orderTableRuleConfig.setActualDataNodes("dbs_${0..1}.order_${0..2}");
+        orderTableRuleConfig.setActualDataNodes("dbs_${0..2}.order_${0..2}");
         orderTableRuleConfig.setKeyGeneratorColumnName("id");
         orderTableRuleConfig.setKeyGeneratorClass(DefaultKeyGenerator.class.getName());
-        orderTableRuleConfig.setDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("user_id", "dbs_${user_id % 2}"));
+        orderTableRuleConfig.setDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("user_id", "dbs_${user_id % 3}"));
         orderTableRuleConfig.setTableShardingStrategyConfig(new InlineShardingStrategyConfiguration("id", "order_${id % 3}"));
 
         //用户表分表分库规则
         TableRuleConfiguration userTableRuleConfig = new TableRuleConfiguration();
         userTableRuleConfig.setLogicTable("user");
-        userTableRuleConfig.setActualDataNodes("dbs_${0..1}.user_${0}");
+        userTableRuleConfig.setActualDataNodes("dbs_${0..2}.user_${0}");
         userTableRuleConfig.setKeyGeneratorColumnName("id");
         userTableRuleConfig.setKeyGeneratorClass(DefaultKeyGenerator.class.getName());
-        userTableRuleConfig.setDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("id", "dbs_${id % 2}"));
+        userTableRuleConfig.setDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("id", "dbs_${id % 3}"));
         userTableRuleConfig.setTableShardingStrategyConfig(new InlineShardingStrategyConfiguration("id", "user_${id % id}"));
 
         //分表分库配置

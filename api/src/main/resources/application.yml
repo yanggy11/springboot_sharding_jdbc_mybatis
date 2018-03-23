@@ -23,4 +23,6 @@ master:
     type: com.alibaba.druid.pool.DruidDataSource
 slave:
     url: jdbc:mysql://rm-bp17330s3si44dsz7bo.mysql.rds.aliyuncs.com:3306/dbs_1
+slave2:
+    url: jdbc:mysql://rm-bp17330s3si44dsz7bo.mysql.rds.aliyuncs.com:3306/dbs_2
 

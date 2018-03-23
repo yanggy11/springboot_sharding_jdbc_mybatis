@@ -19,6 +19,8 @@ public class ShardingProperties {
     private String url;
     @Value("${slave.url}")
     private String url2;
+    @Value("${slave2.url}")
+    private String url3;
     @Value("${master.username}")
     private String username;
     @Value("${master.password}")
