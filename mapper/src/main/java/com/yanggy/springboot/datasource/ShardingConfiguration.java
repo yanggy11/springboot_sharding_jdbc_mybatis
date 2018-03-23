@@ -35,6 +35,7 @@ public class ShardingConfiguration {
         dataSourceMap.put("dbs_0", this.buildDataSource(shardingProperties.getUrl(), shardingProperties.getDriverClassName(), shardingProperties.getPassword(), shardingProperties.getUsername()));
         dataSourceMap.put("dbs_1", this.buildDataSource(shardingProperties.getUrl2(), shardingProperties.getDriverClassName(), shardingProperties.getPassword(), shardingProperties.getUsername()));
 
+        //订单表分表分库规则
         TableRuleConfiguration orderTableRuleConfig = new TableRuleConfiguration();
         orderTableRuleConfig.setLogicTable("order");
         orderTableRuleConfig.setActualDataNodes("dbs_${0..1}.order_${0..2}");
@@ -43,6 +44,7 @@ public class ShardingConfiguration {
         orderTableRuleConfig.setDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("user_id", "dbs_${user_id % 2}"));
         orderTableRuleConfig.setTableShardingStrategyConfig(new InlineShardingStrategyConfiguration("id", "order_${id % 3}"));
 
+        //用户表分表分库规则
         TableRuleConfiguration userTableRuleConfig = new TableRuleConfiguration();
         userTableRuleConfig.setLogicTable("user");
         userTableRuleConfig.setActualDataNodes("dbs_${0..1}.user_${0}");
@@ -51,6 +53,7 @@ public class ShardingConfiguration {
         userTableRuleConfig.setDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("id", "dbs_${id % 2}"));
         userTableRuleConfig.setTableShardingStrategyConfig(new InlineShardingStrategyConfiguration("id", "user_${id % id}"));
 
+        //分表分库配置
         ShardingRuleConfiguration shardingRuleConfig = new ShardingRuleConfiguration();
 
         shardingRuleConfig.getTableRuleConfigs().add(orderTableRuleConfig);

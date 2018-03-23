@@ -5,20 +5,26 @@
         <result column="id" property="id" jdbcType="BIGINT"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
 
-    <insert id="insertUser" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO user(name,user_id, age) VALUES(#{name},#{userId}, #{age})
+    <insert id="insertUser" keyProperty="id" useGeneratedKeys="true" parameterType="com.yanggy.springboot.entity.User">
+        INSERT INTO user(name,user_id, age,password) VALUES(#{name},#{userId}, #{age}, #{password})
     </insert>
 
     <select id="getUserList" parameterType="com.yanggy.springboot.dto.UserParam" resultMap="userMap">
         select id,user_id, name,age from user
         <where>
-            <if test="name != null and name != ''">
-                name = #{name}
-            </if>
+            <!--<if test="name != null and name != ''">-->
+                <!--name = #{name} or age = 30-->
+            <!--</if>-->
+
+            name in ('derrick','derrick1')
         </where>
         order by add_time desc
         <if test="offset > -1 and pageSize > 0">

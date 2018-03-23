@@ -9,20 +9,24 @@
     </resultMap>
 
 
-    <insert id="addOrder">
+    <insert id="addOrder" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO order(user_id, price, address) VALUES(#{userId}, #{price},#{address})
     </insert>
 
     <select id="getOrdersByUserId" parameterType="com.yanggy.springboot.entity.Orders" resultMap="orderMap">
         select id,user_id, price, address from order
         <where>
+            1 = 1
+            <if test="id != null">
+                and id = #{id}
+            </if>
             <if test="userId != null">
-                user_id = #{userId}
+                and user_id = #{userId}
             </if>
         </where>
-        <!--<if test="offset > -1 and pageSize > 0">-->
-            <!--limit #{offset}, #{pageSize}-->
-        <!--</if>-->
+        <if test="offset > -1 and pageSize > 0">
+            limit #{offset}, #{pageSize}
+        </if>
     </select>
 
     <select id="countOrders" parameterType="com.yanggy.springboot.dto.OrderParam" resultType="java.lang.Integer">
