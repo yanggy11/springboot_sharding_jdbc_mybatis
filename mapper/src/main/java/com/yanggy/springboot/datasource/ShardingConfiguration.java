@@ -23,7 +23,7 @@ import java.util.Properties;
  * @Description:
  */
 
-@Component
+//@Component
 public class ShardingConfiguration {
 
     @Autowired

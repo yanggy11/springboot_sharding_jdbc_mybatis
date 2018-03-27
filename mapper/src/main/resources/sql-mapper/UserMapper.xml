@@ -12,13 +12,15 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-
+    <sql id="userColumns">
+        id,user_id, name,age, password, add_time
+    </sql>
     <insert id="insertUser" keyProperty="id" useGeneratedKeys="true" parameterType="com.yanggy.springboot.entity.User">
         INSERT INTO user(name,user_id, age,password) VALUES(#{name},#{userId}, #{age}, #{password})
     </insert>
 
     <select id="getUserList" parameterType="com.yanggy.springboot.dto.UserParam" resultMap="userMap">
-        select id,user_id, name,age from user
+        select <include refid="userColumns"/> from user
         <where>
             <!--<if test="name != null and name != ''">-->
                 <!--name = #{name} or age = 30-->

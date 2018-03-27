@@ -11,6 +11,8 @@
  */
 package com.yanggy.springboot.template;
 
+import com.yanggy.springboot.common.ResponseEntityDto;
+
 /**
  * 回调接口，参照spring jdbctemplate ConnectionCallback
  * 
@@ -25,7 +27,6 @@ public interface Callback<T> {
      * @author chenjian
      * @since 2017年9月5日 下午2:58:39
      * @param res
-     * @throws ServiceException
      * @see
      */
     void doExecute(ResponseEntityDto<T> res);

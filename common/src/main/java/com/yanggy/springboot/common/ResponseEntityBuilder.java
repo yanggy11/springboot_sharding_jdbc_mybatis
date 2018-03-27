@@ -1,8 +1,5 @@
 package com.yanggy.springboot.common;
 
-import com.mobanker.standard.file.contract.enums.ErrorCodeEnum;
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.Serializable;
 
 /**
@@ -28,13 +25,13 @@ public class ResponseEntityBuilder {
      *            常见错误枚举类的一个实例.<br>
      * @return
      */
-    public static <T> ResponseEntityDto<T> buildErrorResponse(ErrorCodeEnum enums) {
-        ResponseEntityDto<T> entity = new ResponseEntityDto<>();
-        entity.setStatus(RESPONSE_FAIL);
-        entity.setError(String.valueOf(enums.getCode()));
-        entity.setMsg(enums.getMessage());
-        return entity;
-    }
+//    public static <T> ResponseEntityDto<T> buildErrorResponse(ErrorCodeEnum enums) {
+//        ResponseEntityDto<T> entity = new ResponseEntityDto<>();
+//        entity.setStatus(RESPONSE_FAIL);
+//        entity.setError(String.valueOf(enums.getCode()));
+//        entity.setMsg(enums.getMessage());
+//        return entity;
+//    }
 
     /**
      * 构造一个失败响应.<br>
@@ -46,16 +43,16 @@ public class ResponseEntityBuilder {
      * @return
      *
      */
-    public static <T> ResponseEntityDto<T> buildErrorResponse(String error, String message) {
-        ResponseEntityDto<T> entity = new ResponseEntityDto<>();
-        entity.setStatus(RESPONSE_FAIL);
-        if(StringUtils.isBlank(error) || !StringUtils.isNumeric(error)){
-            error = "401";
-        }
-        entity.setError(error);
-        entity.setMsg(message);
-        return entity;
-    }
+//    public static <T> ResponseEntityDto<T> buildErrorResponse(String error, String message) {
+//        ResponseEntityDto<T> entity = new ResponseEntityDto<>();
+//        entity.setStatus(RESPONSE_FAIL);
+//        if(StringUtils.isBlank(error) || !StringUtils.isNumeric(error)){
+//            error = "401";
+//        }
+//        entity.setError(error);
+//        entity.setMsg(message);
+//        return entity;
+//    }
 
     /**
      * 构造一个正常响应.<br>
@@ -87,11 +84,11 @@ public class ResponseEntityBuilder {
      *            响应数据.<br>
      * @return
      */
-    public static <T> ResponseEntityDto<T> buildUnNormalResponse(T data,ErrorCodeEnum enums) {
-        ResponseEntityDto<T> entity = buildErrorResponse(enums);
-        entity.setData(data);
-        return entity;
-    }
+//    public static <T> ResponseEntityDto<T> buildUnNormalResponse(T data,ErrorCodeEnum enums) {
+//        ResponseEntityDto<T> entity = buildErrorResponse(enums);
+//        entity.setData(data);
+//        return entity;
+//    }
 
     public static <T> Boolean isSuccess(ResponseEntityDto<T> entity){
         return entity.getStatus().equals(RESPONSE_OK);
