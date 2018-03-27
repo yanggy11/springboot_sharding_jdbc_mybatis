@@ -7,23 +7,6 @@ spring:
 mybatis:
   mapper-locations: classpath:sql-mapper/*.xml
 
-master:
-    url: jdbc:mysql://rm-bp17330s3si44dsz7bo.mysql.rds.aliyuncs.com:3306/dbs_0
-    driver-class-name: com.mysql.jdbc.Driver
-    username: root
-    password: Ygy250725
-    initialSize: 1
-    minIdle: 1
-    maxActive: 20
-    maxWait: 60000
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    type: com.alibaba.druid.pool.DruidDataSource
-slave:
-    url: jdbc:mysql://rm-bp17330s3si44dsz7bo.mysql.rds.aliyuncs.com:3306/dbs_1
-slave2:
-    url: jdbc:mysql://rm-bp17330s3si44dsz7bo.mysql.rds.aliyuncs.com:3306/dbs_2
-
 # 所有主从库
 sharding:
   jdbc:
@@ -90,20 +73,3 @@ sharding:
               inline:
                 sharding-column: user_id
                 algorithm-expression: dbs_${user_id % 3}
-
-## 分库规则
-#sharding.jdbc.config.sharding.default-database-strategy.inline.sharding-column=city_id
-#sharding.jdbc.config.sharding.default-database-strategy.inline.algorithm-expression=ds_${city_id % 2}
-#
-## 分表规则
-#sharding.jdbc.config.sharding.tables.t_user.actualDataNodes=ds_${0..1}.t_user_${0..1}
-#sharding.jdbc.config.sharding.tables.t_user.tableStrategy.inline.shardingColumn=user_id
-#sharding.jdbc.config.sharding.tables.t_user.tableStrategy.inline.algorithmExpression=t_user_${user_id % 2}
-## 使用user_id作为分布式主键
-#sharding.jdbc.config.sharding.tables.t_user.keyGeneratorColumnName=user_id
-#
-## 逻辑主从库名和实际主从库映射关系
-#sharding.jdbc.config.sharding.master-slave-rules.ds_0.masterDataSourceName=ds_master_0
-#sharding.jdbc.config.sharding.master-slave-rules.ds_0.slaveDataSourceNames=ds_master_0_slave_0, ds_master_0_slave_1
-#sharding.jdbc.config.sharding.master-slave-rules.ds_1.masterDataSourceName=ds_master_1
-#sharding.jdbc.config.sharding.master-slave-rules.ds_1.slaveDataSourceNames=ds_master_1_slave_0, ds_master_1_slave_1

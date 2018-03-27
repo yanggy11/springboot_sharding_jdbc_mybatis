@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * @Description:
  */
 
-@Configuration
+//@Configuration
 @Data
 public class ShardingProperties {
     @Value("${master.driver-class-name}")

@@ -7,9 +7,7 @@ import io.shardingjdbc.core.api.config.TableRuleConfiguration;
 import io.shardingjdbc.core.api.config.strategy.InlineShardingStrategyConfiguration;
 import io.shardingjdbc.core.keygen.DefaultKeyGenerator;
 import org.codehaus.groovy.runtime.metaclass.ConcurrentReaderHashMap;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -26,7 +24,7 @@ import java.util.Properties;
 //@Component
 public class ShardingConfiguration {
 
-    @Autowired
+//    @Autowired
     private ShardingProperties shardingProperties;
     @Bean
     public DataSource dataSource() throws SQLException {

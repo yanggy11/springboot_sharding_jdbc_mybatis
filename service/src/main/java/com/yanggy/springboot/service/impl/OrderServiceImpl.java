@@ -22,11 +22,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public ResponseEntity<?> addOrder(Orders orders) {
-        return new ResponseEntity<Object>(orderMapper.addOrder(orders), HttpStatus.OK);
+        return new ResponseEntity<>(orderMapper.addOrder(orders), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<?> getOrdersList(OrderParam order) {
-        return new ResponseEntity<Object>(orderMapper.getOrdersByUserId(order), HttpStatus.OK);
+        return new ResponseEntity<>(orderMapper.getOrdersByUserId(order), HttpStatus.OK);
     }
 }
