@@ -12,7 +12,7 @@
     </resultMap>
 
     <sql id="userColumns">
-        id, name,age, password, add_time
+        id, name,age, password, add_time, delete_flag, update_time
     </sql>
     <insert id="insertUser" keyProperty="id" useGeneratedKeys="true" parameterType="com.yanggy.springboot.entity.User">
         INSERT INTO user(name, age,password) VALUES(#{name}, #{age}, #{password})
@@ -20,13 +20,6 @@
 
     <select id="getUserList" parameterType="com.yanggy.springboot.dto.UserParam" resultMap="userMap">
         select <include refid="userColumns"/> from user
-        <where>
-            <!--<if test="name != null and name != ''">-->
-                <!--name = #{name} or age = 30-->
-            <!--</if>-->
-
-            name in ('derrick','derrick1')
-        </where>
         order by add_time desc
         <if test="offset > -1 and pageSize > 0">
             limit #{offset}, #{pageSize}
