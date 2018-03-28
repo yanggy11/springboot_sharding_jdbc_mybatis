@@ -3,7 +3,6 @@
 <mapper namespace="com.yanggy.springboot.mapper.UserMapper">
     <resultMap id="userMap" type="com.yanggy.springboot.entity.User">
         <result column="id" property="id" jdbcType="BIGINT"/>
-        <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="age" property="age" jdbcType="INTEGER"/>
@@ -13,10 +12,10 @@
     </resultMap>
 
     <sql id="userColumns">
-        id,user_id, name,age, password, add_time
+        id, name,age, password, add_time
     </sql>
     <insert id="insertUser" keyProperty="id" useGeneratedKeys="true" parameterType="com.yanggy.springboot.entity.User">
-        INSERT INTO user(name,user_id, age,password) VALUES(#{name},#{userId}, #{age}, #{password})
+        INSERT INTO user(name, age,password) VALUES(#{name}, #{age}, #{password})
     </insert>
 
     <select id="getUserList" parameterType="com.yanggy.springboot.dto.UserParam" resultMap="userMap">

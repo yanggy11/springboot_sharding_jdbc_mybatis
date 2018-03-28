@@ -58,10 +58,10 @@ sharding:
                 shardingColumn: id
                 algorithmExpression: user_${id % id}
             keyGeneratorColumnName: id
-            default-database-strategy:
+            databaseStrategy:
               inline:
-                sharding-column: id
-                algorithm-expression: dbs_${id % id}
+                shardingColumn: id
+                algorithmExpression: dbs_${id % 3}
           order:
             actualDataNodes: dbs_${0..2}.order_${0..2}
             tableStrategy:
@@ -69,7 +69,7 @@ sharding:
                 shardingColumn: id
                 algorithmExpression: order_${id % 3}
             keyGeneratorColumnName: id
-            default-database-strategy:
+            databaseStrategy:
               inline:
-                sharding-column: user_id
-                algorithm-expression: dbs_${user_id % 3}
+                shardingColumn: user_id
+                algorithmExpression: dbs_${user_id % 3}
