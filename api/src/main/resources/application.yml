@@ -73,7 +73,8 @@ sharding:
               inline:
                 shardingColumn: user_id
                 algorithmExpression: dbs_${user_id % 3}
-
+        props:
+          sql.show: true
 #sharding:
 #	jdbc:
 #		datasource: //数据源配置
