@@ -73,3 +73,65 @@ sharding:
               inline:
                 shardingColumn: user_id
                 algorithmExpression: dbs_${user_id % 3}
+
+#sharding:
+#	jdbc:
+#		datasource: //数据源配置
+#			names: ds_master_0,ds_master_1,ds_master_0_slave_0,ds_master_0_slave_1,ds_master_1_slave_0,ds_master_1_slave_1
+#			ds_master_0:
+#				type: com.alibaba.druid.pool.DruidDataSource
+#				driverClassName: com.mysql.jdbc.Driver
+#				url: jdbc:mysql://127.0.0.1:3306/ds_master_0?useSSL=false
+#				username: travis
+#				password:
+#			ds_master_0_slave_0:
+#				type: com.alibaba.druid.pool.DruidDataSource
+#			    driverClassName: com.mysql.jdbc.Driver
+#			    url: jdbc:mysql://127.0.0.1:3306/ds_master_0_slave_0?useSSL=false
+#			    username: travis
+#			    password:
+#			ds_master_0_slave_1:
+#				type: com.alibaba.druid.pool.DruidDataSource
+#			    driverClassName: com.mysql.jdbc.Driver
+#			    url: jdbc:mysql://127.0.0.1:3306/ds_master_0_slave_1?useSSL=false
+#			    username: travis
+#			    password:
+#			ds_master_1:
+#				type: com.alibaba.druid.pool.DruidDataSource
+#			    driverClassName: com.mysql.jdbc.Driver
+#			    url: jdbc:mysql://127.0.0.1:3306/ds_master_1?useSSL=false
+#			    username: travis
+#			    password:
+#			ds_master_1_slave_0:
+#				type: com.alibaba.druid.pool.DruidDataSource
+#			    driverClassName: com.mysql.jdbc.Driver
+#			    url: jdbc:mysql://127.0.0.1:3306/ds_master_1_slave_0?useSSL=false
+#			    username: travis
+#			    password:
+#			ds_master_1_slave_1:
+#				type: com.alibaba.druid.pool.DruidDataSource
+#			    driverClassName: com.mysql.jdbc.Driver
+#			    url: jdbc:mysql://127.0.0.1:3306/ds_master_1_slave_1?useSSL=false
+#			    username: travis
+#			    password:
+#		config:
+#			sharding:
+#				tables: //分库分表配置
+#					t_user:
+#						actualDataNodes:
+#						tableStrategy:
+#							inline:
+#								shardingColumn: user_id
+#								algorithmExpression: t_user_${user_id % 2}
+#						keyGeneratorColumnName: user_id
+#						databaseStrategy:
+#							inline:
+#								shardingColumn: user_id
+#								algorithmExpression: t_user_${user_id % 2}
+#				master-slave-rules: //主从配置
+#					ds_0:
+#						masterDataSourceName: ds_master_0
+#						slaveDataSourceNames: ds_master_0_slave_0, ds_master_0_slave_1:
+#					ds_1:
+#						masterDataSourceName: ds_master_1
+#                        slaveDataSourceNames: ds_master_1_slave_0, ds_master_1_slave_1
