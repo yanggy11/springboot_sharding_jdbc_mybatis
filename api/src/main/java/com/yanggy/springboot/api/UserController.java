@@ -24,6 +24,10 @@ public class UserController {
     public ResponseEntity<?> getUsers(@RequestBody UserParam userParam) {
         return userService.getUsers(userParam);
     }
+    @RequestMapping(value = "getUserById", method = RequestMethod.POST)
+    public ResponseEntity<?> getUserById(@RequestBody UserParam userParam) {
+        return userService.getUserById(userParam);
+    }
 
     @RequestMapping(value = "addUser", method = RequestMethod.POST)
     public ResponseEntity<?> addUser(@RequestBody User user) {

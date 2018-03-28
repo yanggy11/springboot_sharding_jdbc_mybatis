@@ -11,4 +11,6 @@ public interface UserService {
     ResponseEntity<?> getUsers(UserParam userParam);
 
     ResponseEntity<?> addUser(User user);
+
+    ResponseEntity<?> getUserById(UserParam userParam);
 }

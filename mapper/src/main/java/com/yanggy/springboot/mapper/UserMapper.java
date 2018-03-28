@@ -17,4 +17,6 @@ public interface UserMapper {
     int insertUser(User user);
     List<User> getUserList(UserParam userParam);
 
+    User getUserById(UserParam userParam);
+
 }

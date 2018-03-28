@@ -30,7 +30,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<?> addUser(User user) {
         userMapper.insertUser(user);
+        UserParam userParam = new UserParam();
+        userParam.setUserId(user.getId());
+        return new ResponseEntity<Object>(userMapper.getUserById(userParam),HttpStatus.OK);
+    }
 
-        return new ResponseEntity<Object>(user,HttpStatus.OK);
+    @Override
+    public ResponseEntity<?> getUserById(UserParam userParam) {
+        return new ResponseEntity<Object>(userMapper.getUserById(userParam),HttpStatus.OK);
     }
 }

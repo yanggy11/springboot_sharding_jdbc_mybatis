@@ -13,7 +13,6 @@ import java.util.List;
 @Data
 public class User implements Serializable {
     private long id;
-    private long userId;
     private String password;
     private String name;
     private int age;

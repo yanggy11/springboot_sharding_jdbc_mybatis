@@ -15,6 +15,7 @@ public class UserParam implements Serializable{
     private int pageNo = 1;
     private int pageSize = 20;
     private int offset;
+    private Long userId;
 
     public int getOffset() {
         if(this.pageNo <1 || this.pageSize < 1) {
