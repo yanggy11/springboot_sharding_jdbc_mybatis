@@ -1,0 +1,67 @@
+sharding:
+  jdbc:
+    datasource:
+      names: dbs_0,dbs_1,dbs_2
+      dbs_0:
+        url: jdbc:mysql://rm-bp17330s3si44dsz7bo.mysql.rds.aliyuncs.com:3306/dbs_0
+        driver-class-name: com.mysql.jdbc.Driver
+        username: root
+        password: Ygy250725
+        initialSize: 1
+        minIdle: 1
+        maxActive: 20
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        type: com.alibaba.druid.pool.DruidDataSource
+      dbs_1:
+        url: jdbc:mysql://rm-bp17330s3si44dsz7bo.mysql.rds.aliyuncs.com:3306/dbs_1
+        driver-class-name: com.mysql.jdbc.Driver
+        username: root
+        password: Ygy250725
+        initialSize: 1
+        minIdle: 1
+        maxActive: 20
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        type: com.alibaba.druid.pool.DruidDataSource
+      dbs_2:
+        url: jdbc:mysql://rm-bp17330s3si44dsz7bo.mysql.rds.aliyuncs.com:3306/dbs_2
+        driver-class-name: com.mysql.jdbc.Driver
+        username: root
+        password: Ygy250725
+        initialSize: 1
+        minIdle: 1
+        maxActive: 20
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        type: com.alibaba.druid.pool.DruidDataSource
+    config:
+      sharding:
+        tables:
+          user:
+            actualDataNodes: dbs_${0..2}.user_${0}
+            tableStrategy:
+              inline:
+                shardingColumn: id
+                algorithmExpression: user_${id % id}
+            keyGeneratorColumnName: id
+            databaseStrategy:
+              inline:
+                shardingColumn: id
+                algorithmExpression: dbs_${id % 3}
+          order:
+            actualDataNodes: dbs_${0..2}.order_${0..2}
+            tableStrategy:
+              inline:
+                shardingColumn: id
+                algorithmExpression: order_${id % 3}
+            keyGeneratorColumnName: id
+            databaseStrategy:
+              inline:
+                shardingColumn: user_id
+                algorithmExpression: dbs_${user_id % 3}
+        props:
+          sql.show: true
