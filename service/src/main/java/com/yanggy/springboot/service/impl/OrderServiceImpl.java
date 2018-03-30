@@ -1,12 +1,12 @@
 package com.yanggy.springboot.service.impl;
 
+import com.yanggy.springboot.common.ResponseEntityBuilder;
+import com.yanggy.springboot.common.ResponseEntityDto;
 import com.yanggy.springboot.dto.OrderParam;
 import com.yanggy.springboot.entity.Orders;
 import com.yanggy.springboot.mapper.OrderMapper;
 import com.yanggy.springboot.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,12 +21,12 @@ public class OrderServiceImpl implements OrderService {
     private OrderMapper orderMapper;
 
     @Override
-    public ResponseEntity<?> addOrder(Orders orders) {
-        return new ResponseEntity<>(orderMapper.addOrder(orders), HttpStatus.OK);
+    public ResponseEntityDto<?> addOrder(Orders orders) {
+        return ResponseEntityBuilder.buildNormalResponse(orderMapper.addOrder(orders));
     }
 
     @Override
-    public ResponseEntity<?> getOrdersList(OrderParam order) {
-        return new ResponseEntity<>(orderMapper.getOrdersByUserId(order), HttpStatus.OK);
+    public ResponseEntityDto<?> getOrdersList(OrderParam order) {
+        return ResponseEntityBuilder.buildNormalResponse(orderMapper.getOrdersByUserId(order));
     }
 }

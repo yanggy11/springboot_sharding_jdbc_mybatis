@@ -1,10 +1,10 @@
 package com.yanggy.springboot.api;
 
+import com.yanggy.springboot.common.ResponseEntityDto;
 import com.yanggy.springboot.dto.OrderParam;
 import com.yanggy.springboot.entity.Orders;
 import com.yanggy.springboot.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,12 +22,12 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping(value = "addOrder")
-    public ResponseEntity<?> addOrder(@RequestBody Orders orders) {
+    public ResponseEntityDto<?> addOrder(@RequestBody Orders orders) {
         return orderService.addOrder(orders);
     }
 
     @PostMapping(value = "/orderList")
-    public ResponseEntity<?> getOrderList(@RequestBody OrderParam orderParam) {
+    public ResponseEntityDto<?> getOrderList(@RequestBody OrderParam orderParam) {
         return orderService.getOrdersList(orderParam);
     }
 }

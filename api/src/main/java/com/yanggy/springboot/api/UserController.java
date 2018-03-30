@@ -1,10 +1,10 @@
 package com.yanggy.springboot.api;
 
+import com.yanggy.springboot.common.ResponseEntityDto;
 import com.yanggy.springboot.dto.UserParam;
 import com.yanggy.springboot.entity.User;
 import com.yanggy.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,16 +21,16 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "userList", method = RequestMethod.POST)
-    public ResponseEntity<?> getUsers(@RequestBody UserParam userParam) {
+    public ResponseEntityDto<?> getUsers(@RequestBody UserParam userParam) {
         return userService.getUsers(userParam);
     }
     @RequestMapping(value = "getUserById", method = RequestMethod.POST)
-    public ResponseEntity<?> getUserById(@RequestBody UserParam userParam) {
+    public ResponseEntityDto<?> getUserById(@RequestBody UserParam userParam) {
         return userService.getUserById(userParam);
     }
 
     @RequestMapping(value = "addUser", method = RequestMethod.POST)
-    public ResponseEntity<?> addUser(@RequestBody User user) {
+    public ResponseEntityDto<?> addUser(@RequestBody User user) {
         return userService.addUser(user);
     }
 }

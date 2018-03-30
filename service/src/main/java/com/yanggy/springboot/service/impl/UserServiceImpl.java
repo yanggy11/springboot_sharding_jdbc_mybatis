@@ -1,12 +1,11 @@
 package com.yanggy.springboot.service.impl;
 
+import com.yanggy.springboot.common.ResponseEntityBuilder;
+import com.yanggy.springboot.common.ResponseEntityDto;
 import com.yanggy.springboot.dto.UserParam;
 import com.yanggy.springboot.entity.User;
 import com.yanggy.springboot.mapper.UserMapper;
 import com.yanggy.springboot.service.UserService;
-import io.shardingjdbc.core.keygen.DefaultKeyGenerator;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,20 +22,20 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public ResponseEntity<?> getUsers(UserParam userParam) {
-        return new ResponseEntity<Object>(userMapper.getUserList(userParam),HttpStatus.OK);
+    public ResponseEntityDto<?> getUsers(UserParam userParam) {
+        return ResponseEntityBuilder.buildNormalResponse(userMapper.getUserList(userParam));
     }
 
     @Override
-    public ResponseEntity<?> addUser(User user) {
+    public ResponseEntityDto<?> addUser(User user) {
         userMapper.insertUser(user);
         UserParam userParam = new UserParam();
         userParam.setUserId(user.getId());
-        return new ResponseEntity<Object>(userMapper.getUserById(userParam),HttpStatus.OK);
+        return ResponseEntityBuilder.buildNormalResponse(userMapper.getUserById(userParam));
     }
 
     @Override
-    public ResponseEntity<?> getUserById(UserParam userParam) {
-        return new ResponseEntity<Object>(userMapper.getUserById(userParam),HttpStatus.OK);
+    public ResponseEntityDto<?> getUserById(UserParam userParam) {
+        return ResponseEntityBuilder.buildNormalResponse(userMapper.getUserById(userParam));
     }
 }
