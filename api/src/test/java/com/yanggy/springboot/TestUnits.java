@@ -1,6 +1,8 @@
 package com.yanggy.springboot;
 
+import com.yanggy.springboot.entity.Orders;
 import com.yanggy.springboot.entity.User;
+import com.yanggy.springboot.mapper.OrderMapper;
 import com.yanggy.springboot.mapper.UserMapper;
 import com.yanggy.springboot.service.UserService;
 import org.junit.Test;
@@ -30,32 +32,29 @@ public class TestUnits {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderMapper orderMapper;
     @Test
     public void test() {
+        for(int i = 0; i < 2000000; i++) {
+            User user = new User();
+            user.setAge(new Random().nextInt(100));
+            user.setName(Thread.currentThread().getName() + "_" + i +"_u");
+            user.setPassword("kjldaljkjl");
 
+            userMapper.insertUser(user);
+            int orderCounts = new Random().nextInt(1000);
+            for(int j = 0; j < orderCounts; j++) {
+                Orders orders = new Orders();
+                orders.setUserId(user.getId());
+                orders.setAddress("qd" + new Random().nextInt(1000));
+                orders.setPrice(new Random().nextInt(1000));
 
-        for(int i = 0; i < 1000; i++) {
-            new Thread(() -> {
-                Random random = new Random(100);
-                User user = new User("123456", Thread.currentThread().getName() + "_h_", random.nextInt(100));
-                userMapper.insertUser(user);
-                System.out.println(user);
-            }).start();
+                orderMapper.addOrder(orders);
+            }
         }
+
     }
-
-    @Test
-    public void testUser() {
-        Random random = new Random(100);
-
-
-
-
-                    for(int i = 0; i < 50000; i++) {
-                        User user = new User("123456", Thread.currentThread().getName() + "_jj_" + i, random.nextInt(100));
-                        userMapper.insertUser(user);
-                        System.out.println(user);
-                    }
-                }
 
 }
