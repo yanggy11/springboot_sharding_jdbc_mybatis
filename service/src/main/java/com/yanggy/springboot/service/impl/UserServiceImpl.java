@@ -6,10 +6,13 @@ import com.yanggy.springboot.dto.UserParam;
 import com.yanggy.springboot.entity.User;
 import com.yanggy.springboot.mapper.UserMapper;
 import com.yanggy.springboot.service.UserService;
+import com.yanggy.springboot.utils.PageUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Created by yangguiyun on 2017/9/26.
@@ -23,15 +26,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntityDto<?> getUsers(UserParam userParam) {
-        return ResponseEntityBuilder.buildNormalResponse(userMapper.getUserList(userParam));
+        List<User> users = userMapper.getUserList(userParam);
+        Integer usersCount = userMapper.getUserCount(userParam);
+        return ResponseEntityBuilder.buildNormalResponse(PageUtils.buildPage(userParam.getPageNo(), userParam.getPageSize(), usersCount, users));
     }
 
     @Override
     public ResponseEntityDto<?> addUser(User user) {
+
         userMapper.insertUser(user);
-        UserParam userParam = new UserParam();
-        userParam.setUserId(user.getId());
-        return ResponseEntityBuilder.buildNormalResponse(userMapper.getUserById(userParam));
+        return ResponseEntityBuilder.buildNormalResponse(user);
     }
 
     @Override

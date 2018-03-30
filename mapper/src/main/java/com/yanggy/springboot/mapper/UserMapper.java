@@ -19,4 +19,5 @@ public interface UserMapper {
 
     User getUserById(UserParam userParam);
 
+    Integer getUserCount(UserParam userParam);
 }

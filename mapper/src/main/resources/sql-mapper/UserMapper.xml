@@ -32,4 +32,8 @@
             id = #{userId}
         </where>
     </select>
+
+    <select id="getUserCount" parameterType="com.yanggy.springboot.dto.UserParam" resultType="java.lang.Integer">
+        select count(1) from user
+    </select>
 </mapper>
