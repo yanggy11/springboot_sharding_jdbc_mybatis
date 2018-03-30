@@ -1,6 +1,6 @@
 package com.yanggy.springboot.uuid;
 
-import com.relops.snowflake.Snowflake;
+import io.shardingjdbc.core.keygen.KeyGenerator;
 
 /**
  * 基于Twitter的Snowflake算法实现分布式高效有序ID生产黑科技(sequence)
@@ -25,7 +25,7 @@ import com.relops.snowflake.Snowflake;
  *
  * @author lry
  */
-public final class Sequence {
+public final class Sequence implements KeyGenerator{
 
     /** 开始时间截 */
     private final long twepoch = 1288834974657L;
@@ -159,5 +159,10 @@ public final class Sequence {
      */
     protected long timeGen() {
         return SystemClock.now();
+    }
+
+    @Override
+    public Number generateKey() {
+        return nextId();
     }
 }
