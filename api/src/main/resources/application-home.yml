@@ -3,7 +3,7 @@ sharding:
     datasource:
       names: dbs_m_0,dbs_m_1,dbs_m_2,dbs_m_0_slave_0,dbs_m_1_slave_0,dbs_m_2_slave_0
       dbs_m_0:
-        url: jdbc:mysql://localhost:3307/dbs_0?useUnicode=true&characterEncoding=utf8
+        url: jdbc:mysql://localhost:3307/dbs_0?useUnicode=true&characterEncoding=utf8&verifyServerCertificate=false&useSSL=true
         driver-class-name: com.mysql.jdbc.Driver
         username: root
         password: root
@@ -15,7 +15,7 @@ sharding:
         minEvictableIdleTimeMillis: 300000
         type: com.alibaba.druid.pool.DruidDataSource
       dbs_m_0_slave_0:
-        url: jdbc:mysql://localhost:33062/dbs_0?useUnicode=true&characterEncoding=utf8
+        url: jdbc:mysql://localhost:33062/dbs_0?useUnicode=true&characterEncoding=utf8&verifyServerCertificate=false&useSSL=true
         driver-class-name: com.mysql.jdbc.Driver
         username: root
         password: root
@@ -27,7 +27,7 @@ sharding:
         minEvictableIdleTimeMillis: 300000
         type: com.alibaba.druid.pool.DruidDataSource
       dbs_m_1:
-        url: jdbc:mysql://localhost:3307/dbs_1?useUnicode=true&characterEncoding=utf8
+        url: jdbc:mysql://localhost:3307/dbs_1?useUnicode=true&characterEncoding=utf8&verifyServerCertificate=false&useSSL=true
         driver-class-name: com.mysql.jdbc.Driver
         username: root
         password: root
@@ -39,7 +39,7 @@ sharding:
         minEvictableIdleTimeMillis: 300000
         type: com.alibaba.druid.pool.DruidDataSource
       dbs_m_1_slave_0:
-        url: jdbc:mysql://localhost:33062/dbs_1?useUnicode=true&characterEncoding=utf8
+        url: jdbc:mysql://localhost:33062/dbs_1?useUnicode=true&characterEncoding=utf8&verifyServerCertificate=false&useSSL=true
         driver-class-name: com.mysql.jdbc.Driver
         username: root
         password: root
@@ -51,7 +51,7 @@ sharding:
         minEvictableIdleTimeMillis: 300000
         type: com.alibaba.druid.pool.DruidDataSource
       dbs_m_2:
-        url: jdbc:mysql://localhost:3307/dbs_2?useUnicode=true&characterEncoding=utf8
+        url: jdbc:mysql://localhost:3307/dbs_2?useUnicode=true&characterEncoding=utf8&verifyServerCertificate=false&useSSL=true
         driver-class-name: com.mysql.jdbc.Driver
         username: root
         password: root
@@ -63,7 +63,7 @@ sharding:
         minEvictableIdleTimeMillis: 300000
         type: com.alibaba.druid.pool.DruidDataSource
       dbs_m_2_slave_0:
-        url: jdbc:mysql://localhost:33062/dbs_2?useUnicode=true&characterEncoding=utf8
+        url: jdbc:mysql://localhost:33062/dbs_2?useUnicode=true&characterEncoding=utf8&verifyServerCertificate=false&useSSL=true
         driver-class-name: com.mysql.jdbc.Driver
         username: root
         password: root
