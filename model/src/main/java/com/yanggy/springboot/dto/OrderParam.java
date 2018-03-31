@@ -17,6 +17,8 @@ public class OrderParam implements Serializable {
     private int pageSize = 20;
     private int offset;
 
+    private Long lastId;
+
     public int getOffset() {
         if(this.pageNo <1 || this.pageSize < 1) {
             return  -1;

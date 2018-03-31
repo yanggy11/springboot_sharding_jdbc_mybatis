@@ -15,11 +15,11 @@ public final class PageUtils {
      * @param data
      * @return
      */
-    public static Page buildPage(int pageNo, int pageSize, int count, Object data) {
+    public static Page buildPage(int pageNo, int pageSize, int count, Object data, Object lastId) {
         int totalPage = count / pageSize;
         int restPage = count % pageSize;
         totalPage = 0 == restPage ? totalPage : totalPage + 1;
 
-        return new Page(pageNo, pageSize, count, totalPage, data);
+        return new Page(pageNo, pageSize, count, totalPage, lastId, data);
     }
 }

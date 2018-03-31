@@ -19,17 +19,20 @@ public class Page<T> implements Serializable {
     private int totalPage;
     private int offset;
 
+    private Object lastId;
+
     private T data;
 
     public int getOffset() {
         return (this.pageNo - 1) * this.pageSize;
     }
 
-    public Page(int pageNo, int pageSize, int totalRecords, int totalPage, T data) {
+    public Page(int pageNo, int pageSize, int totalRecords, int totalPage, Object lastId, T data) {
         this.pageNo = pageNo;
         this.pageSize = pageSize;
         this.totalRecords = totalRecords;
         this.totalPage = totalPage;
+        this.lastId = lastId;
         this.data = data;
     }
 

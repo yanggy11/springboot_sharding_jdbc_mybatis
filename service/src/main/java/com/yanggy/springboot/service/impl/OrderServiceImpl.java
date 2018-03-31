@@ -10,6 +10,9 @@ import com.yanggy.springboot.utils.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author derrick.yang
  * @Date 3/22/18 22:26
@@ -28,8 +31,15 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public ResponseEntityDto<?> getOrdersList(OrderParam order) {
+        List<Map> orders = orderMapper.getOrders(order);
+
+        Object lastId = null;
+        if(null != orders && orders.size() > 0) {
+            lastId = orders.get(orders.size() - 1).get("id");
+        }
+
         return ResponseEntityBuilder.buildNormalResponse(PageUtils.buildPage(order.getPageNo(), order.getPageSize(),
-                orderMapper.countOrders(order), orderMapper.getOrders(order)));
+                orderMapper.countOrders(order), orders, lastId));
     }
 
     @Override

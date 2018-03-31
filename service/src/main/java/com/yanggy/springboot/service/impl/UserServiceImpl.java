@@ -27,8 +27,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntityDto<?> getUsers(UserParam userParam) {
         List<User> users = userMapper.getUserList(userParam);
+
+        Object lastId = null;
+        if(null != users && users.size() > 0) {
+            lastId = users.get(users.size() - 1).getId();
+        }
         Integer usersCount = userMapper.getUserCount(userParam);
-        return ResponseEntityBuilder.buildNormalResponse(PageUtils.buildPage(userParam.getPageNo(), userParam.getPageSize(), usersCount, users));
+        return ResponseEntityBuilder.buildNormalResponse(PageUtils.buildPage(userParam.getPageNo(), userParam.getPageSize(), usersCount, users, lastId));
     }
 
     @Override
