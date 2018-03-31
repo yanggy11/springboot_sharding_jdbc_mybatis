@@ -48,6 +48,7 @@ sharding:
                 shardingColumn: id
                 algorithmExpression: user_${id % id}
             keyGeneratorColumnName: id
+            keyGeneratorClass: com.yanggy.springboot.uuid.IpKeyGenerator
             databaseStrategy:
               inline:
                 shardingColumn: id
@@ -59,6 +60,7 @@ sharding:
                 shardingColumn: id
                 algorithmExpression: order_${id % 3}
             keyGeneratorColumnName: id
+            keyGeneratorClass: com.yanggy.springboot.uuid.IpKeyGenerator
             databaseStrategy:
               inline:
                 shardingColumn: user_id

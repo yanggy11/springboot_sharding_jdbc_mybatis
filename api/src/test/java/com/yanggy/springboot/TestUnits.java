@@ -5,6 +5,7 @@ import com.yanggy.springboot.entity.User;
 import com.yanggy.springboot.mapper.OrderMapper;
 import com.yanggy.springboot.mapper.UserMapper;
 import com.yanggy.springboot.service.UserService;
+import com.yanggy.springboot.uuid.IpKeyGenerator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class TestUnits {
         for(int i = 0; i < 2000000; i++) {
             User user = new User();
             user.setAge(new Random().nextInt(100));
-            user.setName(Thread.currentThread().getName() + "_" + i +"_u");
+            user.setName(Thread.currentThread().getName() + "_" + i +"_mac");
             user.setPassword("kjldaljkjl");
 
             userMapper.insertUser(user);
@@ -54,7 +55,6 @@ public class TestUnits {
                 orderMapper.addOrder(orders);
             }
         }
-
     }
 
 }

@@ -5,6 +5,7 @@ import com.yanggy.springboot.entity.Orders;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author derrick.yang
@@ -18,4 +19,8 @@ public interface OrderMapper {
     List<Orders> getOrdersByUserId(OrderParam orders);
 
     int countOrders(OrderParam orderParam);
+
+    List<Map> getOrders(OrderParam orderParam);
+
+    Map getOrderInfo(OrderParam orderParam);
 }

@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Data
 public class OrderParam implements Serializable {
     private Long userId;
+    private Long orderId;
     private int pageNo = 1;
     private int pageSize = 20;
     private int offset;

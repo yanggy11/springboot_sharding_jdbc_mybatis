@@ -6,6 +6,7 @@ import com.yanggy.springboot.dto.OrderParam;
 import com.yanggy.springboot.entity.Orders;
 import com.yanggy.springboot.mapper.OrderMapper;
 import com.yanggy.springboot.service.OrderService;
+import com.yanggy.springboot.utils.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public ResponseEntityDto<?> getOrdersList(OrderParam order) {
-        return ResponseEntityBuilder.buildNormalResponse(orderMapper.getOrdersByUserId(order));
+        return ResponseEntityBuilder.buildNormalResponse(PageUtils.buildPage(order.getPageNo(), order.getPageSize(),
+                orderMapper.countOrders(order), orderMapper.getOrders(order)));
+    }
+
+    @Override
+    public ResponseEntityDto<?> getOrderInfo(OrderParam orderParam) {
+        return ResponseEntityBuilder.buildNormalResponse(orderMapper.getOrderInfo(orderParam));
     }
 }

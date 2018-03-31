@@ -10,10 +10,20 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <sql id="order_column">
+        id,user_id, price, address
+    </sql>
 
     <insert id="addOrder" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO order(user_id, price, address) VALUES(#{userId}, #{price},#{address})
     </insert>
+
+    <select id="getOrderInfo" parameterType="com.yanggy.springboot.dto.OrderParam" resultType="java.util.Map">
+        SELECT o.id,user_id as userId, price, address, u.name, u.password from order o left join user u on o.user_id = u.id
+        <where>
+            o.id = #{orderId}
+        </where>
+    </select>
 
     <select id="getOrdersByUserId" parameterType="com.yanggy.springboot.dto.OrderParam" resultMap="orderMap">
         select id,user_id, price, address from order
@@ -28,11 +38,23 @@
         </if>
     </select>
 
+    <select id="getOrders" parameterType="com.yanggy.springboot.dto.OrderParam" resultType="java.util.Map">
+        select o.id,user_id as userId, price, address, u.name, u.password from order o LEFT JOIN user u on o.user_id = u.id
+        <where>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+        </where>
+        <if test="offset > -1 and pageSize > 0">
+            limit #{offset}, #{pageSize}
+        </if>
+    </select>
+
     <select id="countOrders" parameterType="com.yanggy.springboot.dto.OrderParam" resultType="java.lang.Integer">
         select COUNT(1) from ORDER
         <where>
             <if test="userId != null">
-                user_id = #{userId}
+                and user_id = #{userId}
             </if>
         </where>
     </select>

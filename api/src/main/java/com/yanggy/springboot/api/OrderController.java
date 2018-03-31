@@ -30,4 +30,9 @@ public class OrderController {
     public ResponseEntityDto<?> getOrderList(@RequestBody OrderParam orderParam) {
         return orderService.getOrdersList(orderParam);
     }
+
+    @PostMapping(value = "getOrderInfo")
+    public ResponseEntityDto<?> getOrderInfo(@RequestBody OrderParam orderParam) {
+        return orderService.getOrderInfo(orderParam);
+    }
 }
