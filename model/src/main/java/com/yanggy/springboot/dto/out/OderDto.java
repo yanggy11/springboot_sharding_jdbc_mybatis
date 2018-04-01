@@ -15,6 +15,7 @@ public class OderDto implements Serializable {
     private Long orderId;
     private Long userId;
     private String name;
+    private String password;
     private int price;
     private String address;
     private Date addTime;

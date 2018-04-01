@@ -18,7 +18,7 @@
         INSERT INTO user(name, age,password) VALUES(#{name}, #{age}, #{password})
     </insert>
 
-    <select id="getUserList" parameterType="com.yanggy.springboot.dto.UserParam" resultMap="userMap">
+    <select id="getUserList" parameterType="com.yanggy.springboot.dto.in.UserParam" resultMap="userMap">
         select <include refid="userColumns"/> from user
         order by add_time desc
         <if test="offset > -1 and pageSize > 0">
@@ -26,14 +26,14 @@
         </if>
     </select>
 
-    <select id="getUserById" parameterType="com.yanggy.springboot.dto.UserParam" resultMap="userMap">
+    <select id="getUserById" parameterType="com.yanggy.springboot.dto.in.UserParam" resultMap="userMap">
         SELECT <include refid="userColumns"/> from user
         <where>
             id = #{userId}
         </where>
     </select>
 
-    <select id="getUserCount" parameterType="com.yanggy.springboot.dto.UserParam" resultType="java.lang.Integer">
+    <select id="getUserCount" parameterType="com.yanggy.springboot.dto.in.UserParam" resultType="java.lang.Integer">
         select count(1) from user
     </select>
 </mapper>

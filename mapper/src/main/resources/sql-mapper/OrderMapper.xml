@@ -7,6 +7,7 @@
         <result column="price" property="price" jdbcType="INTEGER"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -19,14 +20,14 @@
         INSERT INTO order(user_id, price, address) VALUES(#{userId}, #{price},#{address})
     </insert>
 
-    <select id="getOrderInfo" parameterType="com.yanggy.springboot.dto.OrderParam" resultType="java.util.Map">
+    <select id="getOrderInfo" parameterType="com.yanggy.springboot.dto.in.OrderParam" resultType="java.util.Map">
         SELECT o.id,user_id as userId, price, address, u.name, u.password from order o left join user u on o.user_id = u.id
         <where>
             o.id = #{orderId}
         </where>
     </select>
 
-    <select id="getOrdersByUserId" parameterType="com.yanggy.springboot.dto.OrderParam" resultMap="orderMap">
+    <select id="getOrdersByUserId" parameterType="com.yanggy.springboot.dto.in.OrderParam" resultMap="orderMap">
         select id,user_id, price, address from order
         <where>
             1 = 1
@@ -39,8 +40,8 @@
         </if>
     </select>
 
-    <select id="getOrders" parameterType="com.yanggy.springboot.dto.OrderParam" resultMap="orderMap">
-        select o.id,user_id as userId, price, address, u.name, u.password from order o LEFT JOIN user u on o.user_id = u.id
+    <select id="getOrders" parameterType="com.yanggy.springboot.dto.in.OrderParam" resultMap="orderMap">
+        select o.id,user_id, price, address, name, password from order o LEFT JOIN user u on o.user_id = u.id
         <where>
             <if test="lastId != null">
                 o.id &lt; #{lastId}
@@ -56,7 +57,7 @@
 
     </select>
 
-    <select id="getOrdersByLimit" parameterType="com.yanggy.springboot.dto.OrderParam" resultMap="orderMap">
+    <select id="getOrdersByLimit" parameterType="com.yanggy.springboot.dto.in.OrderParam" resultMap="orderMap">
         select o.id,user_id as userId, price, address, u.name, u.password from order o LEFT JOIN user u on o.user_id = u.id
         <where>
             <if test="orderId != null">
@@ -73,7 +74,7 @@
 
     </select>
 
-    <select id="countOrders" parameterType="com.yanggy.springboot.dto.OrderParam" resultType="java.lang.Integer">
+    <select id="countOrders" parameterType="com.yanggy.springboot.dto.in.OrderParam" resultType="java.lang.Integer">
         select COUNT(1) from ORDER
         <where>
             <if test="userId != null">

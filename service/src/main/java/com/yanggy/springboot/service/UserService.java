@@ -1,7 +1,7 @@
 package com.yanggy.springboot.service;
 
 import com.yanggy.springboot.common.ResponseEntityDto;
-import com.yanggy.springboot.dto.UserParam;
+import com.yanggy.springboot.dto.in.UserParam;
 import com.yanggy.springboot.entity.User;
 
 /**

@@ -1,6 +1,7 @@
 package com.yanggy.springboot.mapper;
 
-import com.yanggy.springboot.dto.OrderParam;
+import com.yanggy.springboot.dto.in.OrderParam;
+import com.yanggy.springboot.dto.out.OderDto;
 import com.yanggy.springboot.entity.Orders;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,7 +21,9 @@ public interface OrderMapper {
 
     int countOrders(OrderParam orderParam);
 
-    List<Map> getOrders(OrderParam orderParam);
+    List<OderDto> getOrders(OrderParam orderParam);
+
+    List<OderDto> getOrdersByLimit(OrderParam orderParam);
 
     Map getOrderInfo(OrderParam orderParam);
 }

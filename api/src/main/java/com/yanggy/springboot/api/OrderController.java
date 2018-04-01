@@ -1,7 +1,7 @@
 package com.yanggy.springboot.api;
 
 import com.yanggy.springboot.common.ResponseEntityDto;
-import com.yanggy.springboot.dto.OrderParam;
+import com.yanggy.springboot.dto.in.OrderParam;
 import com.yanggy.springboot.entity.Orders;
 import com.yanggy.springboot.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,7 +2,8 @@ package com.yanggy.springboot.service.impl;
 
 import com.yanggy.springboot.common.ResponseEntityBuilder;
 import com.yanggy.springboot.common.ResponseEntityDto;
-import com.yanggy.springboot.dto.OrderParam;
+import com.yanggy.springboot.dto.in.OrderParam;
+import com.yanggy.springboot.dto.out.OderDto;
 import com.yanggy.springboot.entity.Orders;
 import com.yanggy.springboot.mapper.OrderMapper;
 import com.yanggy.springboot.service.OrderService;
@@ -31,11 +32,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public ResponseEntityDto<?> getOrdersList(OrderParam order) {
-        List<Map> orders = orderMapper.getOrders(order);
+        List<OderDto> orders = orderMapper.getOrders(order);
 
         Object lastId = null;
         if(null != orders && orders.size() > 0) {
-            lastId = orders.get(orders.size() - 1).get("id");
+            lastId = orders.get(orders.size() - 1).getOrderId();
         }
 
         return ResponseEntityBuilder.buildNormalResponse(PageUtils.buildPage(order.getPageNo(), order.getPageSize(),
