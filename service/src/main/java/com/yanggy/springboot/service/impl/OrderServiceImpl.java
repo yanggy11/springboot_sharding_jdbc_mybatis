@@ -44,6 +44,19 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public ResponseEntityDto<?> getOrdersListByLimit(OrderParam order) {
+        List<OderDto> orders = orderMapper.getOrdersByLimit(order);
+
+        Object lastId = null;
+        if(null != orders && orders.size() > 0) {
+            lastId = orders.get(orders.size() - 1).getOrderId();
+        }
+
+        return ResponseEntityBuilder.buildNormalResponse(PageUtils.buildPage(order.getPageNo(), order.getPageSize(),
+                orderMapper.countOrders(order), orders, lastId));
+    }
+
+    @Override
     public ResponseEntityDto<?> getOrderInfo(OrderParam orderParam) {
         return ResponseEntityBuilder.buildNormalResponse(orderMapper.getOrderInfo(orderParam));
     }

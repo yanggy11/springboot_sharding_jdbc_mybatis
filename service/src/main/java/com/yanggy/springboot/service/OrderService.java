@@ -11,6 +11,7 @@ import com.yanggy.springboot.entity.Orders;
 public interface OrderService {
     ResponseEntityDto<?> addOrder(Orders orders);
     ResponseEntityDto<?> getOrdersList(OrderParam order);
+    ResponseEntityDto<?> getOrdersListByLimit(OrderParam order);
 
     ResponseEntityDto<?> getOrderInfo(OrderParam orderParam);
 }

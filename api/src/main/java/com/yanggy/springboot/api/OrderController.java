@@ -30,6 +30,10 @@ public class OrderController {
     public ResponseEntityDto<?> getOrderList(@RequestBody OrderParam orderParam) {
         return orderService.getOrdersList(orderParam);
     }
+    @PostMapping(value = "/orderListByLimit")
+    public ResponseEntityDto<?> getOrderListBylimit(@RequestBody OrderParam orderParam) {
+        return orderService.getOrdersListByLimit(orderParam);
+    }
 
     @PostMapping(value = "getOrderInfo")
     public ResponseEntityDto<?> getOrderInfo(@RequestBody OrderParam orderParam) {
