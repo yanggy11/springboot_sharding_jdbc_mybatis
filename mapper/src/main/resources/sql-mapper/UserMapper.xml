@@ -20,9 +20,14 @@
 
     <select id="getUserList" parameterType="com.yanggy.springboot.dto.in.UserParam" resultMap="userMap">
         select <include refid="userColumns"/> from user
-        order by add_time desc
-        <if test="offset > -1 and pageSize > 0">
-            limit #{offset}, #{pageSize}
+        <where>
+            <if test="lastId != null">
+                AND id &lt; #{lastId}
+            </if>
+        </where>
+        order by id desc
+        <if test="pageSize > 0">
+            limit #{pageSize}
         </if>
     </select>
 
