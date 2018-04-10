@@ -70,13 +70,13 @@ public class TestCode {
         student1.setStuName("derrick2");
         student1.setFee(10000);
         Student student2 = new Student();
-        student2.setId(2);
+        student2.setId(3);
         student2.setStuAge(24);
         student2.setStuNo("No.0003");
         student2.setFee(10000);
         student2.setStuName("derrick3");
         Student student3 = new Student();
-        student3.setId(2);
+        student3.setId(4);
         student3.setStuAge(70);
         student3.setStuNo("No.0004");
         student3.setStuName("derrick4");
@@ -104,65 +104,23 @@ public class TestCode {
         students.add(student1);
         students.add(student2);
         students.add(student3);
-        List<String> stuNames = new ArrayList<>();
 
+        List<String> stuNames = students.stream().map(Student::getStuName).collect(Collectors.toList());
 
-
-//        students.stream().filter(stu -> stu.getStuAge() > 10).map((stu -> stu.getStuName())).sorted().collect(Collectors.toCollection(() -> stuNames));
-//
-//
-//        String[] str = {"I", "love", "you", "too", "too"};
-//
-//        Stream<List<Integer>> stream = Stream.of(Arrays.asList(1,2), Arrays.asList(3, 4, 5));
-//        stream.flatMap(list -> list.stream()).collect(Collectors.toList());
-//        BinaryOperator<String> binaryOperator = (s1, s2) -> s1.length() < s2.length() ? s1 : s2;
-//
-//        /**
-//         * reduce 方法
-//         */
-////        Optional<String> minStr = Stream.of(stuNames, Arrays.asList(str)).flatMap(list -> list.stream()).distinct().reduce(binaryOperator);
-////
-////        minStr.ifPresent((str3) -> {
-////            //操作
-////            System.out.println(str3);
-////        });
-//
-////        Arrays.stream(str).distinct().sorted((str1, str2) -> {
-////            return str1.length() - str2.length();
-////        }).map(str1 -> str1.toUpperCase()).collect(Collectors.toCollection(() -> {
-////            return stuNames;
-////        }));
-//        /**
-//         * reduce(identity, BinaryOperator)
-//         */
-//        String identity = "hello";
-//
-//       String minStr = Stream.of(stuNames, Arrays.asList(str)).flatMap(list -> list.stream()).distinct().reduce(identity, (S1,S2) -> {
-//           return S1.concat(",").concat(S2);
-//       });
-//
-//        System.out.println(minStr);
-
-        students.stream().collect(Collectors.groupingBy(Student::getStuAge));
-
-        List<String> names = students.stream().map((stu -> {
-            return stu.getStuNo();
-        })).collect(Collectors.toCollection(ArrayList::new));
-        OptionalInt sumFee = students.stream().mapToInt((stu1 -> stu1.getFee())).reduce((stu1, stu2) -> {
-            return stu1 + stu2;
+        Optional<Student> oldestStudent = students.stream().reduce((stu1, stu2) -> {
+            return stu1.getStuAge() > stu2.getStuAge() ? stu1 : stu2;
         });
-        Map<String, String> map = students.stream().collect(Collectors.toMap(stu -> stu.getStuNo(), stu->stu.getStuName()));
-        Map map1 = students.stream().collect(Collectors.toMap(Student::getId, Student::getFee, (s, a) -> s + a, HashMap::new));
 
-        System.out.println(map1);
+        Consumer<Student>consumer = System.out::println;
 
-        map1.forEach((key, value) -> {
-            Integer v = null;
-            if(value instanceof Integer) {
-                v = (Integer)value;
-            }
-            System.out.println(key + ":" + v);
-        });
-        System.out.println(sumFee.orElse(0));
+        oldestStudent.ifPresent(consumer);
+
+        Map<Integer, List<Student>> map = students.stream().collect(Collectors.groupingBy(Student::getStuAge,HashMap::new, Collectors.toList()));
+        System.out.println(map);
+
+        Map<Boolean, List<Student>> listMap = students.stream().collect(Collectors.partitioningBy((stu) -> stu.getStuAge() > 20));
+
+        System.out.println(listMap);
+
     }
 }
