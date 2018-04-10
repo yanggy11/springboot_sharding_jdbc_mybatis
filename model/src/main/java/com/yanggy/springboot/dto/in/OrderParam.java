@@ -10,20 +10,6 @@ import java.io.Serializable;
  */
 
 @Data
-public class OrderParam implements Serializable {
-    private Long userId;
+public class OrderParam extends BaseParam implements Serializable {
     private Long orderId;
-    private int pageNo = 1;
-    private int pageSize = 20;
-    private int offset;
-
-    private Long lastId;
-
-    public int getOffset() {
-        if(this.pageNo <1 || this.pageSize < 1) {
-            return  -1;
-        }
-
-        return (this.pageNo - 1) * this.pageSize;
-    }
 }
