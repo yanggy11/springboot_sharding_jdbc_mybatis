@@ -16,5 +16,6 @@ public class Student implements Serializable {
     private String stuName;
     private String stuNo;
     private int stuAge;
-    private int Fee;
+    private Integer Fee;
+    private String sex;
 }

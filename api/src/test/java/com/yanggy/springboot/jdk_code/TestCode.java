@@ -61,33 +61,28 @@ public class TestCode {
         student.setStuAge(14);
         student.setStuNo("No.0001");
         student.setStuName("derricl");
+        student.setSex("");
+        student.setFee(10000);
         Student student1 = new Student();
         student1.setId(2);
         student1.setStuAge(30);
         student1.setStuNo("No.0002");
         student1.setStuName("derrick2");
+        student1.setFee(10000);
         Student student2 = new Student();
         student2.setId(2);
         student2.setStuAge(24);
-        student2.setStuNo("No.0002");
-        student2.setStuName("derrick2");
+        student2.setStuNo("No.0003");
+        student2.setFee(10000);
+        student2.setStuName("derrick3");
         Student student3 = new Student();
         student3.setId(2);
         student3.setStuAge(70);
-        student3.setStuNo("No.0002");
-        student3.setStuName("derrick2");
+        student3.setStuNo("No.0004");
+        student3.setStuName("derrick4");
+        student3.setFee(10000);
 
         System.out.println(function.apply(student));
-
-        Consumer<Student> consumer = (stu -> {
-            if(predicate.test(stu.getStuAge())) {
-                stu.setFee(100);
-            }else {
-                stu.setFee(50);
-            }
-        });
-
-        consumer.accept(student);
 
         System.out.println(student);
 
@@ -110,6 +105,8 @@ public class TestCode {
         students.add(student2);
         students.add(student3);
         List<String> stuNames = new ArrayList<>();
+
+
 
 //        students.stream().filter(stu -> stu.getStuAge() > 10).map((stu -> stu.getStuName())).sorted().collect(Collectors.toCollection(() -> stuNames));
 //
@@ -146,12 +143,26 @@ public class TestCode {
 //
 //        System.out.println(minStr);
 
-        Student studentOptional = students.stream().reduce(student,(stu1, stu2) -> {
-            return stu1.getStuAge() < stu2.getStuAge() ? stu1 : stu2;
+        students.stream().collect(Collectors.groupingBy(Student::getStuAge));
+
+        List<String> names = students.stream().map((stu -> {
+            return stu.getStuNo();
+        })).collect(Collectors.toCollection(ArrayList::new));
+        OptionalInt sumFee = students.stream().mapToInt((stu1 -> stu1.getFee())).reduce((stu1, stu2) -> {
+            return stu1 + stu2;
         });
+        Map<String, String> map = students.stream().collect(Collectors.toMap(stu -> stu.getStuNo(), stu->stu.getStuName()));
+        Map map1 = students.stream().collect(Collectors.toMap(Student::getId, Student::getFee, (s, a) -> s + a, HashMap::new));
 
-        System.out.println(studentOptional);
+        System.out.println(map1);
 
-
+        map1.forEach((key, value) -> {
+            Integer v = null;
+            if(value instanceof Integer) {
+                v = (Integer)value;
+            }
+            System.out.println(key + ":" + v);
+        });
+        System.out.println(sumFee.orElse(0));
     }
 }
