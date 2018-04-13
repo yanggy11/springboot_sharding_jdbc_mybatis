@@ -1,10 +1,11 @@
 server:
   port: 1988
+  contextPath:  /sharding
 
 spring:
   application:
     name: springboot
   profiles:
-    active: office-localhost
+    active: office
 mybatis:
   mapper-locations: classpath:sql-mapper/*.xml

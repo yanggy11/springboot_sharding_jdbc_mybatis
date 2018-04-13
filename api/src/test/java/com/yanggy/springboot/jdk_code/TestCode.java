@@ -74,14 +74,14 @@ public class TestCode {
         student1.setFee(10000);
         student1.setSex("Male");
         Student student2 = new Student();
-        student2.setId(2);
+        student2.setId(3);
         student2.setStuAge(24);
         student2.setStuNo("No.0003");
         student2.setFee(10000);
         student2.setStuName("derrick3");
         student2.setSex("Female");
         Student student3 = new Student();
-        student3.setId(2);
+        student3.setId(4);
         student3.setStuAge(70);
         student3.setStuNo("No.0004");
         student3.setStuName("derrick4");
@@ -207,5 +207,22 @@ public class TestCode {
         if(sum1 == sum.orElseGet(() -> 0)) {
             System.out.println(true);
         }
+
+        List<String> stuNames = students.stream().map(Student::getStuName).collect(Collectors.toList());
+
+        Optional<Student> oldestStudent = students.stream().reduce((stu1, stu2) -> {
+            return stu1.getStuAge() > stu2.getStuAge() ? stu1 : stu2;
+        });
+
+        Consumer<Student>consumer = System.out::println;
+
+        oldestStudent.ifPresent(consumer);
+
+        Map<Integer, List<Student>> map = students.stream().collect(Collectors.groupingBy(Student::getStuAge,HashMap::new, Collectors.toList()));
+        System.out.println(map);
+
+        Map<Boolean, List<Student>> listMap = students.stream().collect(Collectors.partitioningBy((stu) -> stu.getStuAge() > 20));
+
+        System.out.println(listMap);
     }
 }
