@@ -1,14 +1,8 @@
 package com.yanggy.springboot.jdk_code;
 
-import javafx.print.Collation;
-import org.springframework.beans.BeanUtils;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.*;
-import java.util.function.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @Author: yangguiyun
