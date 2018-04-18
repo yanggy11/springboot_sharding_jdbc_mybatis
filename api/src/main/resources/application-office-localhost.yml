@@ -41,7 +41,7 @@ sharding:
     config:
       sharding:
         tables:
-          user:
+          user:  //YamlTableRuleConfiguration
             actualDataNodes: dbs_${0..2}.user_${0}
             tableStrategy:
               inline:
@@ -67,3 +67,7 @@ sharding:
                 algorithmExpression: dbs_${user_id % 3}
         props:
           sql.show: true
+#spring:
+#  data:
+#    mongodb:
+#      uri: mongodb://derrick:ygy250725@localhost:27017/yanggy
