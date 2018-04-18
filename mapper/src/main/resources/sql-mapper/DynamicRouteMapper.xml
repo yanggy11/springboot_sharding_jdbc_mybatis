@@ -10,24 +10,30 @@
         <result column="stripPrefix" property="stripPrefix" jdbcType="TINYINT"/>
         <result column="retryable" property="retryable" jdbcType="TINYINT"/>
         <result column="enabled" property="enabled" jdbcType="TINYINT"/>
-        <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
+        <result column="create_time" property="addTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="dynamic_route_column">
-        id,dynamicId, update_time, add_time, enabled, retryable, stripPrefix, url, serviceId, path
+        id,dynamicId, update_time, create_time, enabled, retryable, stripPrefix, url, serviceId, path
     </sql>
 
-    <select id=""  parameterType="com.yanggy.springboot.dto.in.DynamicRouteParam" resultMap="routeMap">
+    <select id="getRoutesByPage"  parameterType="com.yanggy.springboot.dto.in.DynamicRouteParam" resultMap="routeMap">
         select <include refid="dynamic_route_column"/>
         from dynamic_route
         <where>
             delete_flag = 0
         </where>
 
-        <if test="offset >= 0"></if>
+        <if test="offset >= 0 and pageSize > 0">
+            limit #{offset}, #{pageSize}
+        </if>
     </select>
     <select id="countRoutes" parameterType="com.yanggy.springboot.dto.in.DynamicRouteParam" resultType="java.lang.Integer">
-
+        select count(*)
+        from dynamic_route
+        <where>
+            delete_flag = 0
+        </where>
     </select>
 </mapper>

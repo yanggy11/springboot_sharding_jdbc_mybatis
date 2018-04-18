@@ -5,6 +5,8 @@ import com.yanggy.springboot.dto.in.DynamicRouteParam;
 import com.yanggy.springboot.entity.DynamicRoute;
 import com.yanggy.springboot.service.DynamicRouteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +22,8 @@ public class DynamicRouteController {
     @Autowired
     private DynamicRouteService dynamicRouteService;
 
-    ResponseEntityDto<?> getRoutesByPage(DynamicRouteParam dynamicRouteParam) {
+    @PostMapping(value = "getRoutesByPage")
+    ResponseEntityDto<?> getRoutesByPage(@RequestBody DynamicRouteParam dynamicRouteParam) {
         return dynamicRouteService.getRoutesByPage(dynamicRouteParam);
     }
 
