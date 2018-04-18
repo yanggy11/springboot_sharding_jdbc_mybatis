@@ -1,7 +1,7 @@
 sharding:
   jdbc:
     datasource:
-      names: dbs_0,dbs_1,dbs_2
+      names: dbs_0,dbs_1,dbs_2,yanggy
       dbs_0:
         url: jdbc:mysql://localhost:3306/dbs_0?useUnicode=true&characterEncoding=utf8&verifyServerCertificate=false&useSSL=true
         driver-class-name: com.mysql.jdbc.Driver
@@ -38,10 +38,22 @@ sharding:
         timeBetweenEvictionRunsMillis: 60000
         minEvictableIdleTimeMillis: 300000
         type: com.alibaba.druid.pool.DruidDataSource
+      yanggy:
+        url: jdbc:mysql://localhost:3306/yanggy?useUnicode=true&characterEncoding=utf8&verifyServerCertificate=false&useSSL=true
+        driver-class-name: com.mysql.jdbc.Driver
+        username: root
+        password: root
+        initialSize: 1
+        minIdle: 1
+        maxActive: 20
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        type: com.alibaba.druid.pool.DruidDataSource
     config:
-      sharding:
+      sharding: #YamlShardingRuleConfiguration
         tables:
-          user:  //YamlTableRuleConfiguration
+          user:  #YamlTableRuleConfiguration
             actualDataNodes: dbs_${0..2}.user_${0}
             tableStrategy:
               inline:
@@ -67,6 +79,7 @@ sharding:
                 algorithmExpression: dbs_${user_id % 3}
         props:
           sql.show: true
+        defaultDataSourceName: yanggy
 #spring:
 #  data:
 #    mongodb:

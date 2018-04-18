@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanggy.springboot.mapper.MenuMapper">
+    <resultMap id="menuMap" type="com.yanggy.springboot.entity.Menu">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="TINYINT"/>
+        <result column="menu" property="menu" jdbcType="VARCHAR"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="menu_name" property="menuName" jdbcType="VARCHAR"/>
+        <result column="create_time" property="addTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="menuColumns">
+        id, parent_id, delete_flag, menu, icon, menu_name, create_time, update_time
+    </sql>
+
+    <select id="getMenusByPage" parameterType="com.yanggy.springboot.dto.in.MenuParam" resultMap="menuMap">
+        select <include refid="menuColumns"/> from menu
+        <where>
+            delete_flag = 0
+        </where>
+        <if test="offset > 0 and pageSize > 0">
+            limit #{offset}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="countMenus" parameterType="com.yanggy.springboot.dto.in.MenuParam" resultType="java.lang.Integer">
+        select count(*) from menu
+        <where>
+            delete_flag = 0
+        </where>
+    </select>
+
+    <select id="getMenus" parameterType="com.yanggy.springboot.dto.in.MenuParam" resultMap="menuMap">
+        select <include refid="menuColumns"/> from menu
+        <where>
+            delete_flag = 0
+        </where>
+    </select>
+
+    <insert id="addMenu" parameterMap="menuMap">
+        insert into menu(parent_id, menu, icon, menu_name) values(#{parentId}, #{menu}, #{icon}, #{menuName})
+    </insert>
+
+    <update id="editMenu" parameterMap="menuMap">
+        update menu
+        <set>
+            <if test="menu != null and menu != ''">
+                menu = #{menu}
+            </if>
+            <if test="menuName != null and menu != ''">
+                menu_name = #{menuName}
+            </if>
+            <if test="icon != null and icon != ''">
+                icon = #{icon}
+            </if>
+
+            <if test="parentId != null">
+                parent_id = #{parentId}
+            </if>
+            <if test="deleteFlag == 1">
+                delete_flag = 1
+            </if>
+        </set>
+    </update>
+</mapper>
