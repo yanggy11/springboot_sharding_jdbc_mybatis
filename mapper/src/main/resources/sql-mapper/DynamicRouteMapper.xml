@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yanggy.springboot.mapper.DynamicRouteMapper">
-    <resultMap id="orderMap" type="com.yanggy.springboot.entity.DynamicRoute">
+    <resultMap id="routeMap" type="com.yanggy.springboot.entity.DynamicRoute">
         <result column="dynamicId" property="dynamicId" jdbcType="BIGINT"/>
         <result column="id" property="id" jdbcType="VARCHAR"/>
         <result column="path" property="path" jdbcType="VARCHAR"/>
@@ -17,4 +17,17 @@
     <sql id="dynamic_route_column">
         id,dynamicId, update_time, add_time, enabled, retryable, stripPrefix, url, serviceId, path
     </sql>
+
+    <select id=""  parameterType="com.yanggy.springboot.dto.in.DynamicRouteParam" resultMap="routeMap">
+        select <include refid="dynamic_route_column"/>
+        from dynamic_route
+        <where>
+            delete_flag = 0
+        </where>
+
+        <if test="offset >= 0"></if>
+    </select>
+    <select id="countRoutes" parameterType="com.yanggy.springboot.dto.in.DynamicRouteParam" resultType="java.lang.Integer">
+
+    </select>
 </mapper>

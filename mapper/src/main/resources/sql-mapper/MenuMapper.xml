@@ -21,7 +21,7 @@
         <where>
             delete_flag = 0
         </where>
-        <if test="offset > 0 and pageSize > 0">
+        <if test="offset >= 0 and pageSize > 0">
             limit #{offset}, #{pageSize}
         </if>
     </select>
@@ -40,11 +40,11 @@
         </where>
     </select>
 
-    <insert id="addMenu" parameterMap="menuMap">
+    <insert id="addMenu" parameterType="com.yanggy.springboot.entity.Menu">
         insert into menu(parent_id, menu, icon, menu_name) values(#{parentId}, #{menu}, #{icon}, #{menuName})
     </insert>
 
-    <update id="editMenu" parameterMap="menuMap">
+    <update id="editMenu"  parameterType="com.yanggy.springboot.entity.Menu">
         update menu
         <set>
             <if test="menu != null and menu != ''">
@@ -64,5 +64,7 @@
                 delete_flag = 1
             </if>
         </set>
+
+        where id = #{id}
     </update>
 </mapper>

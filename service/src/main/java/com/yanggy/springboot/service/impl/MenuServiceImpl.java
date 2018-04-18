@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Author: yangguiyun
@@ -33,22 +34,32 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public ResponseEntityDto<?> getMenus(MenuParam menuParam) {
-        List<Menu> menus = menuMapper.getMenus(menuParam);
+        List<Menu> menuList = menuMapper.getMenus(menuParam);
 
-        menus.forEach(menu -> {
-
+        menuList.forEach(menu -> {
+            for(Menu menu1 : menuList) {
+                if(menu.getId().equals(menu1.getParentId())) {
+                    menu.getChildrens().add(menu1);
+                }
+            }
         });
 
-        return null;
+        List<Menu> menus = menuList.stream().
+                filter(menu -> menu.getParentId() == -1).
+                collect(Collectors.toList());
+
+        return ResponseEntityBuilder.buildNormalResponse(menus);
     }
 
     @Override
     public ResponseEntityDto<?> addMenu(Menu menu) {
-        return null;
+        menuMapper.addMenu(menu);
+        return ResponseEntityBuilder.buildNormalResponse();
     }
 
     @Override
     public ResponseEntityDto<?> editMenu(Menu menu) {
-        return null;
+        menuMapper.editMenu(menu);
+        return ResponseEntityBuilder.buildNormalResponse();
     }
 }

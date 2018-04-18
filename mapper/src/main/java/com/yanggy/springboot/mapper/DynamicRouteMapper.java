@@ -18,4 +18,6 @@ public interface DynamicRouteMapper {
     int addRoute(DynamicRoute dynamicRoute);
 
     int edit(DynamicRoute dynamicRoute);
+
+    int countRoutes(DynamicRouteParam dynamicRouteParam);
 }
