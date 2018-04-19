@@ -1,5 +1,6 @@
 package com.yanggy.springboot.service.jwt;
 
+import com.yanggy.springboot.dto.out.UserOutDto;
 import com.yanggy.springboot.dto.out.UserRoleDto;
 import com.yanggy.springboot.entity.User;
 import com.yanggy.springboot.jwt.JwtUserFactory;
@@ -26,6 +27,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     private UserMapper userMapper;
     @Autowired
     private UserRoleMapper userRoleMapper;
+
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         User user = new User();

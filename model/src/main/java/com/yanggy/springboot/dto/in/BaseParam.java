@@ -15,6 +15,8 @@ public abstract class BaseParam implements Serializable {
     protected int pageNo = 1;
     protected int pageSize = 20;
     protected int offset;
+    protected Long timeBegin;
+    protected Long timeEnd;
     /**
      * 用户id
      */

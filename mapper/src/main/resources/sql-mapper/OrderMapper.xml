@@ -41,11 +41,18 @@
     <select id="getOrders" parameterType="com.yanggy.springboot.dto.in.OrderParam" resultMap="orderMap">
         select id,user_id, price, address from order
         <where>
-            <if test="lastId != null">
-                id &lt; #{lastId}
-            </if>
+             delete_flag = 0
             <if test="userId != null">
                 and user_id = #{userId}
+            </if>
+            <if test="timeBegin != null">
+                and add_time &gt;= #{timeBegin}
+            </if>
+            <if test="timeEnd != null">
+                and add_time &lt; #{timeEnd}
+            </if>
+            <if test="lastId != null">
+                and id &lt; #{lastId}
             </if>
         </where>
 
@@ -64,6 +71,12 @@
                 and user_id = #{userId}
             </if>
 
+            <if test="timeBegin != null">
+                and add_time &gt;= #{timeBegin}
+            </if>
+            <if test="timeEnd != null">
+                and add_time &lt; #{timeEnd}
+            </if>
         </where>
 
         order by o.id desc
@@ -74,8 +87,18 @@
     <select id="countOrders" parameterType="com.yanggy.springboot.dto.in.OrderParam" resultType="java.lang.Integer">
         select COUNT(id) from ORDER
         <where>
+            delete_flag = 0
             <if test="userId != null">
                 and user_id = #{userId}
+            </if>
+            <if test="timeBegin != null">
+                and add_time &gt;= #{timeBegin}
+            </if>
+            <if test="timeEnd != null">
+                and add_time &lt; #{timeEnd}
+            </if>
+            <if test="lastId != null">
+                and id &lt; #{lastId}
             </if>
         </where>
     </select>

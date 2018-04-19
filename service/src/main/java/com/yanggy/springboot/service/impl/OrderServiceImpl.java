@@ -49,13 +49,17 @@ public class OrderServiceImpl implements OrderService {
         if(null != orders && orders.size() > 0) {
             lastId = orders.get(orders.size() - 1).getOrderId();
         }
-
+        List<Long> userIds = orders.stream().map(OderDto::getUserId).collect(Collectors.toList());
+        UserParam userParam = new UserParam();
+        userParam.setUserIds(userIds);
+        List<User> users = userMapper.getUserList(userParam);
         orders.forEach((orderDto -> {
-            UserParam userParam = new UserParam();
-            userParam.setUserId(orderDto.getUserId());
-            User user = userMapper.getUserById(userParam);
-            orderDto.setName(user.getName());
-            orderDto.setPassword(user.getPassword());
+            users.stream().forEach(user -> {
+                if(user.getId() == orderDto.getUserId()) {
+                    orderDto.setPassword(user.getPassword());
+                    orderDto.setPassword(user.getPassword());
+                }
+            });
         }));
 
         int count = orderMapper.countOrders(order);

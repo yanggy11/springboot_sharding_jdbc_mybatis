@@ -25,6 +25,13 @@
             <if test="lastId != null">
                 AND id &lt; #{lastId}
             </if>
+
+            <if test="userIds.size > 0 and userIds != null">
+                and id in
+                <foreach collection="userIds" index="index" item="item" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
         </where>
         order by id desc
         <if test="pageSize > 0">
