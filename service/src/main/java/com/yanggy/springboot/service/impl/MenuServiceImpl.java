@@ -9,6 +9,7 @@ import com.yanggy.springboot.service.MenuService;
 import com.yanggy.springboot.utils.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
  */
 
 @Service
+@Transactional
 public class MenuServiceImpl implements MenuService {
     @Autowired
     private MenuMapper menuMapper;

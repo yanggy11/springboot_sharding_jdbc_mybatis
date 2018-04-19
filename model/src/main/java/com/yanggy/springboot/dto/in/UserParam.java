@@ -11,4 +11,5 @@ import java.io.Serializable;
 @Data
 public class UserParam extends BaseParam implements Serializable{
     private String name;
+    private String password;
 }

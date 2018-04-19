@@ -28,9 +28,4 @@ public class UserController {
     public ResponseEntityDto<?> getUserById(@RequestBody UserParam userParam) {
         return userService.getUserById(userParam);
     }
-
-    @RequestMapping(value = "addUser", method = RequestMethod.POST)
-    public ResponseEntityDto<?> addUser(@RequestBody User user) {
-        return userService.addUser(user);
-    }
 }
