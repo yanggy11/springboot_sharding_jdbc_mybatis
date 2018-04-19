@@ -1,6 +1,7 @@
 package com.yanggy.springboot.scheduleTask;
 
 
+import com.yanggy.springboot.dto.in.OrderParam;
 import com.yanggy.springboot.dto.in.UserParam;
 import com.yanggy.springboot.entity.Orders;
 import com.yanggy.springboot.entity.User;
@@ -33,8 +34,13 @@ public class CreateUsersAndOrdersTask {
     @Autowired
     private ExecutorService executorService;
 
-    @Scheduled(fixedRate = 2000)
+//    @Scheduled(fixedRate = 2000)
     public void createUsersAndOrders() {
+        int orderCount = orderMapper.countOrders(new OrderParam());
+
+        if(orderCount >= 10000000) {
+            return;
+        }
         int count = userMapper.getUserCount(new UserParam());
         if(count > 2500000) {
             return;

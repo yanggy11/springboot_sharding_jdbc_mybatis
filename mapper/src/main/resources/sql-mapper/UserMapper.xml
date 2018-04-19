@@ -5,6 +5,7 @@
         <result column="id" property="id" jdbcType="BIGINT"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="age" property="age" jdbcType="INTEGER"/>
         <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
         <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
@@ -12,7 +13,7 @@
     </resultMap>
 
     <sql id="userColumns">
-        id, name,age, password, add_time, delete_flag, update_time
+        id, name,age, password, phone, add_time, delete_flag, update_time
     </sql>
     <insert id="insertUser" keyProperty="id" useGeneratedKeys="true" parameterType="com.yanggy.springboot.entity.User">
         INSERT INTO user(name, age,password) VALUES(#{name}, #{age}, #{password})
@@ -23,6 +24,13 @@
         <where>
             <if test="lastId != null">
                 AND id &lt; #{lastId}
+            </if>
+
+            <if test="userIds.size > 0 and userIds != null">
+                and id in
+                <foreach collection="userIds" index="index" item="item" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
             </if>
         </where>
         order by id desc
@@ -40,5 +48,9 @@
 
     <select id="getUserCount" parameterType="com.yanggy.springboot.dto.in.UserParam" resultType="java.lang.Integer">
         select count(1) from user
+    </select>
+
+    <select id="findByName" parameterType="java.lang.String" resultMap="userMap">
+        select <include refid="userColumns"/> from user where name = #{name}
     </select>
 </mapper>

@@ -17,8 +17,8 @@ import java.util.List;
  * Created by yangguiyun on 2017/9/26.
  */
 
-@Transactional
 @Service("userService")
+@Transactional
 public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
@@ -33,13 +33,6 @@ public class UserServiceImpl implements UserService {
         }
         Integer usersCount = userMapper.getUserCount(userParam);
         return ResponseEntityBuilder.buildNormalResponse(PageUtils.buildPage(userParam.getPageNo(), userParam.getPageSize(), usersCount, users, lastId));
-    }
-
-    @Override
-    public ResponseEntityDto<?> addUser(User user) {
-
-        userMapper.insertUser(user);
-        return ResponseEntityBuilder.buildNormalResponse(user);
     }
 
     @Override

@@ -6,6 +6,17 @@ spring:
   application:
     name: springboot
   profiles:
-    active: office
+    active: office-localhost
 mybatis:
   mapper-locations: classpath:sql-mapper/*.xml
+
+#jwt parameters
+jwt:
+  header: Authorization
+  secret: derrick.yang
+  expiration: 604800
+  tokenHead: "Bearer "
+
+security:
+  basic:
+    enabled: false

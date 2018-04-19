@@ -10,7 +10,7 @@ public class Constants {
     public interface ReturnCode {
         String OK = "1";
         String ERROR = "0";
-        String OK_MSG = "";
-        String ERROR_MSG = "";
+        String OK_MSG = "请求成功！";
+        String ERROR_MSG = "发生未知异常！";
     }
 }

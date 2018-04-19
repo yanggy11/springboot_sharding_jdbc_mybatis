@@ -10,6 +10,7 @@
  */
 package com.yanggy.springboot.common;
 
+import com.yanggy.springboot.utils.Constants;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -22,7 +23,7 @@ import java.io.Serializable;
 public class ResponseEntityDto<T> implements Serializable {
     private static final long serialVersionUID = -6084986082723960292L;
 
-    private String status;
+    private String status = Constants.ReturnCode.OK;
     private String error;
     private String msg;
     private T data;

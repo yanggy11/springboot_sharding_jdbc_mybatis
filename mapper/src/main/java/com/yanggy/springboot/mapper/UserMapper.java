@@ -4,6 +4,7 @@ package com.yanggy.springboot.mapper;
 import com.yanggy.springboot.dto.in.UserParam;
 import com.yanggy.springboot.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface UserMapper {
     User getUserById(UserParam userParam);
 
     Integer getUserCount(UserParam userParam);
+
+    User findByName(@Param("name") String name);
 }
