@@ -36,7 +36,7 @@ public class CreateUsersAndOrdersTask {
     @Scheduled(fixedRate = 2000)
     public void createUsersAndOrders() {
         int count = userMapper.getUserCount(new UserParam());
-        if(count > 2000000) {
+        if(count > 2500000) {
             return;
         }
         executorService.submit(() -> {
