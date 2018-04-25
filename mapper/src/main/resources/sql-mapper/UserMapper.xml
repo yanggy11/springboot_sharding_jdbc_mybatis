@@ -16,7 +16,7 @@
         id, name,age, password, phone, add_time, delete_flag, update_time
     </sql>
     <insert id="insertUser" keyProperty="id" useGeneratedKeys="true" parameterType="com.yanggy.springboot.entity.User">
-        INSERT INTO user(name, age,password) VALUES(#{name}, #{age}, #{password})
+        INSERT INTO user(name, age,password, phone) VALUES(#{name}, #{age}, #{password}, #{phone})
     </insert>
 
     <select id="getUserList" parameterType="com.yanggy.springboot.dto.in.UserParam" resultMap="userMap">

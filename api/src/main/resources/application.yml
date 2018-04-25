@@ -6,7 +6,7 @@ spring:
   application:
     name: springboot
   profiles:
-    active: office-localhost
+    active: home
 mybatis:
   mapper-locations: classpath:sql-mapper/*.xml
 

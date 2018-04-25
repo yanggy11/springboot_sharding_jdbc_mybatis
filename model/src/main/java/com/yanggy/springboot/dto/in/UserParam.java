@@ -3,6 +3,7 @@ package com.yanggy.springboot.dto.in;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,5 +14,5 @@ import java.util.List;
 public class UserParam extends BaseParam implements Serializable{
     private String name;
     private String password;
-    private List<Long> userIds;
+    private List<Long> userIds = new ArrayList<>();
 }

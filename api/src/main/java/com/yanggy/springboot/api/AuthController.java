@@ -45,6 +45,6 @@ public class AuthController {
 
     @PostMapping(value = "register")
     public ResponseEntityDto<?> register(@RequestBody User user) {
-        return null;
+        return authService.register(user);
     }
 }

@@ -1,7 +1,7 @@
 sharding:
   jdbc:
     datasource:
-      names: dbs_m_0,dbs_m_1,dbs_m_2,dbs_m_0_slave_0,dbs_m_1_slave_0,dbs_m_2_slave_0
+      names: dbs_m_0,dbs_m_1,dbs_m_2,dbs_m_0_slave_0,dbs_m_1_slave_0,dbs_m_2_slave_0,yanggy
       dbs_m_0:
         url: jdbc:mysql://localhost:3307/dbs_0?useUnicode=true&characterEncoding=utf8&verifyServerCertificate=false&useSSL=true
         driver-class-name: com.mysql.jdbc.Driver
@@ -74,6 +74,18 @@ sharding:
         timeBetweenEvictionRunsMillis: 60000
         minEvictableIdleTimeMillis: 300000
         type: com.alibaba.druid.pool.DruidDataSource
+      yanggy:
+        url: jdbc:mysql://rm-bp17330s3si44dsz7bo.mysql.rds.aliyuncs.com:3306/yanggy?useUnicode=true&characterEncoding=utf8&verifyServerCertificate=false&useSSL=true
+        driver-class-name: com.mysql.jdbc.Driver
+        username: root
+        password: Ygy250725
+        initialSize: 1
+        minIdle: 1
+        maxActive: 20
+        maxWait: 60000
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        type: com.alibaba.druid.pool.DruidDataSource
     config:
       sharding:
         master-slave-rules:
@@ -111,5 +123,6 @@ sharding:
               inline:
                 shardingColumn: user_id
                 algorithmExpression: dbs_${user_id % 3}
+        defaultDataSourceName: yanggy
         props:
           sql.show: true

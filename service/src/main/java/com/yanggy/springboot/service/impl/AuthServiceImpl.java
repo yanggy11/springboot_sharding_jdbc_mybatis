@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -50,9 +51,12 @@ public class AuthServiceImpl implements AuthService {
     private JwtTokenUtil jwtTokenUtil;
     @Override
     public ResponseEntityDto<?> register(User userToAdd) {
+        Md5PasswordEncoder md5PasswordEncoder = new Md5PasswordEncoder();
+        String password = md5PasswordEncoder.encodePassword(userToAdd.getPassword(),null);
+        userToAdd.setPassword(password);
         userMapper.insertUser(userToAdd);
 
-        return ResponseEntityBuilder.buildNormalResponse();
+        return ResponseEntityBuilder.buildNormalResponse(userToAdd);
     }
 
     @Override
